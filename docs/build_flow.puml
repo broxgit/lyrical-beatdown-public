@@ -1,0 +1,31 @@
+@startuml
+
+start
+if (Artist exists via Genius API) then (yes)
+if (Artist exists in MusicBrainz Database) then (yes)
+:Get all valid albums from MusicBrainz;
+:Check database for content;
+if (Artist exists in database?) then (yes)
+  :Use existing artist data;
+  :Compare albums in DB against valid albums;
+  if (All albums exist in database?) then (yes)
+    :Stop build;
+    stop
+  else (no)
+  endif
+else (no)
+  :build artist data from scratch;
+endif
+  partition BuildAlbums {
+    :Get Genius Song Data;
+    :Get MusicBrainz Song Data;
+  }
+stop
+else (no)
+ stop
+endif
+else (no)
+ stop
+endif
+
+@enduml

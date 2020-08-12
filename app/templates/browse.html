@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% if artists %}
+    {% set active_page = "browse_artists" %}
+{% endif %}
+{% if albums %}
+    {% set active_page = "browse_albums" %}
+{% endif %}
+
+{% block head_content %}
+    <script>
+        $(document).ready(function () {
+            $('#albumTable').DataTable({
+                order: [[0, "asc"]],
+                iDisplayLength: 1000
+            });
+            $('#artistTable').DataTable({
+                order: [[0, "asc"]],
+                iDisplayLength: 500
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+                    {% if artists %}
+                        <li class="breadcrumb-item active" aria-current="page">Browse Artists</li>
+                    {% endif %}
+                    {% if albums %}
+                        <li class="breadcrumb-item active" aria-current="page">Browse Albums</li>
+                    {% endif %}
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {% if albums %}
+                <h3>Albums</h3>
+                <div class="table-responsive">
+                    <table id="albumTable" class="table table-striped table-bordered table-bordered table-hover table-dark"
+                           cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th >Album</th>
+                            <th >Artist</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for album in albums|sort(attribute='name') %}
+                            <tr>
+                                <td style="width: 50%">
+                                    <a href={{ url_for('get_album', album_name=album.name, artist=album.artist_name|replace('/', '_')) }}>{{ album.name }}</a>
+                                </td>
+                                <td style="width: 50%">
+                                    <a href={{ url_for('get_artist', artist=album.artist_name|replace('/', '_')) }}>{{ album.artist_name }}</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+
+            {% if artists %}
+                <h3>Artists</h3>
+                <div class="table-responsive">
+                    <table id="artistTable" class="table table-striped table-bordered table-bordered table-hover table-dark"
+                           cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th scope="col">Artist</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for artist in artists|sort(attribute='name') %}
+                            <tr>
+                                <td>
+                                    <a href={{ url_for('get_artist', artist=artist.name|replace('/', '_')) }}>{{ artist.name }}</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+    <br><br>
+    <div class="row">
+    </div>
+{% endblock %}

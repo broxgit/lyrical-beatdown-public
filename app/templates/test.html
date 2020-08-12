@@ -1,0 +1,123 @@
+<script>
+    $(document).ready(function () {
+        $('#simpleWords{{ song.clean_name }}').DataTable({
+            order: [[1, "desc"]]
+        });
+        $('#complexWords{{ song.clean_name }}').DataTable({
+            order: [[1, "desc"]]
+        });
+    });
+</script>
+<div class="card">
+    <div class="card-header" id="heading{{ song.clean_name }}">
+        <h2 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse"
+                    data-target="#collapse{{ song.clean_name }}"
+                    aria-expanded="true" aria-controls="collapse{{ song.clean_name }}">
+                {{ song.name }}
+            </button>
+        </h2>
+    </div>
+
+    <div id="collapse{{ song.clean_name }}" class="collapse"
+         aria-labelledby="heading{{ song.clean_name }}"
+         data-parent="#accordionExample2">
+        <div class="card-body">
+            <div class="row text-center align-items-center">
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item"><strong>Total
+                        Words: </strong>{{ song.total_word_count }}</li>
+                    <li class="list-group-item"><strong>Unique Simple
+                        Words: </strong>{{ song.unique_word_count }}</li>
+                    <li class="list-group-item"><strong>Unique Complex
+                        Words: </strong>{{ song.unique_complex_word_count }}</li>
+                    <li class="list-group-item"><strong>%
+                        Simple: </strong>{{ song.percent_simple }}</li>
+                    <li class="list-group-item"><strong>%
+                        Complex: </strong>{{ song.percent_complex }}</li>
+                </ul>
+            </div>
+            <br><br>
+
+            <div id="collapse{{ song.clean_name }}" class="collapse"
+                 aria-labelledby="heading{{ song.clean_name }}"
+                 data-parent="#accordionExample{{ song.clean_name }}">
+                <div class="card-body">
+                    <div class="accordion" id="accordionExample{{ song.clean_name }}">
+                        <div class="card">
+                            <div class="card-header"
+                                 id="heading{{ song.clean_name }}_word_breakdown">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link" type="button"
+                                            data-toggle="collapse"
+                                            data-target="#collapse{{ song.clean_name }}_word_breakdown"
+                                            aria-expanded="true"
+                                            aria-controls="collapse{{ song.clean_name }}_word_breakdown">
+                                        Word Breakdown
+                                    </button>
+                                </h2>
+                            </div>
+
+                            <div id="collapse{{ song.clean_name }}_word_breakdown"
+                                 class="collapse"
+                                 aria-labelledby="heading{{ song.clean_name }}_word_breakdown"
+                                 data-parent="#accordionExample{{ song.clean_name }}">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            {% if song.unique_words %}
+                                                <table id="simpleWords{{ song.clean_name }}"
+                                                       class="table table-striped table-bordered table-bordered table-hover table-dark"
+                                                       cellspacing="0" width="100%">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">Word</th>
+                                                        <th scope="col"># Times Used
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for key in song.unique_words.keys() %}
+                                                        <tr>
+                                                            <td>{{ key }}</td>
+                                                            <td>{{ song.unique_words[key] }}</td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col">
+                                            {% if song.unique_complex_words %}
+                                                <table id="complexWords{{ song.clean_name }}"
+                                                       class="table table-striped table-bordered table-bordered table-hover table-dark"
+                                                       cellspacing="0" width="100%">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">Word</th>
+                                                        <th scope="col"># Times Used
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for key in song.unique_complex_words.keys() %}
+                                                        <tr>
+                                                            <td>{{ key }}</td>
+                                                            <td>{{ song.unique_complex_words[key] }}</td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
