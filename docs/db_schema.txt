@@ -1,0 +1,49 @@
+Artist
+- Name (Text)
+- MB ID (Int) -- NEW
+- Genius ID (Int)
+- Last Modified (DateTime) -- NEW
+- Date Created (DateTime) -- NEW
+- MB Data? (JSON) -- NEW
+- Total Words (Array) -- NEW
+- Unique Words (JSON) -- NEW
+- Unique Complex Words (JSON) -- NEW
+- Percentage Simple (Decimal or Float) -- NEW
+- Percentage Unique (Decimal or Float) -- NEW
+
+
+Album
+- Name (Text)
+- Year (Int)
+- Label (Text)
+- Album Art (JSON)  -- NEW
+- MB ID (Int)
+- MusicBrainz Data (JSON)
+- !! Not Implemented - may not be possible !! - Genius Data (JSON) -- NEW
+- Artist Name (Text)
+- Artist ID (Int)
+- Last Modified (DateTime) -- NEW
+- Date Created (DateTime) -- NEW
+- Total Words (Array) -- NEW
+- Unique Words (JSON) -- NEW
+- Unique Complex Words (JSON) -- NEW
+- Percentage Simple (Decimal or Float) -- NEW
+- Percentage Unique (Decimal or Float) -- NEW
+
+
+Song
+- Title (Text)
+- Lyrics (Text)
+- MB ID (Int) -- NEW
+- Genius ID (JSON)
+- Is Bonus Track? (bool) -- NEW
+- Producer? (Text) -- NEW
+- MusicBrainz Data (JSON)
+- Genius Data(JSON)
+- Artist ID (Int)
+- Album ID (Int)
+- Total Words (Array) -- NEW
+- Unique Words (JSON) -- NEW
+- Unique Complex Words (JSON) -- NEW
+- Percentage Simple (Decimal or Float) -- NEW
+- Percentage Unique (Decimal or Float) -- NEW

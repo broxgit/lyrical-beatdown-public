@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block head_content %}
+
+{% endblock %}
+{% set active_page = "index" %}
+{% block content %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="text-center justify-content-center">
+            <h3>Welcome to Lyrical Beatdown</h3>
+            <p class="lead">We created this website with the goal of analyzing the lyrical complexity of artists and
+                their albums</p>
+        </div>
+        <div class="container">
+            <ul class="nav justify-content-center">
+                {% for href, id, caption in navigation_bar %}
+                    <li class="nav-item px-md-2">
+                        <a class="nav-link" href="{{ url_for(href) }}">{{ caption }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            Features Coming Soon
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Profanity Check</h5>
+            <p class="card-text">We'll provide a full analysis on the profane and expletive contents of albums and songs, and we'll also give artists an overall profanity score.</p>
+            <p class="card-text"><small class="text-muted">In Progress</small></p>
+            <h5 class="card-title">Song Title in Lyrics</h5>
+            <p class="card-text">For each artist, we'll display which of their song titles they use in their song lyrics.</p>
+            <p class="card-text"><small class="text-muted">Designed, Not Started</small></p>
+            <h5 class="card-title">Data Visualization</h5>
+            <p class="card-text">We'll put our data to use in graphs, charts, and interesting images to show the content we're building.</p>
+            <p class="card-text"><small class="text-muted">Not Started</small></p>
+            <h5 class="card-title">Artist and Album Search</h5>
+            <p class="card-text">We're working on building artist and album data on the fly, giving users the ability to search for ANY artist or album, even if it doesn't exist in our database.</p>
+            <p class="card-text"><small class="text-muted">In Progress</small></p>
+        </div>
+    </div>
+{% endblock %}

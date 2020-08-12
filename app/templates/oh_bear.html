@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% set active_page = "oh_bear" %}
+{% block content %}
+    <div class="jumbotron">
+        <h3>Oh, Bear!</h3>
+        <img src="{{ url_for('static', filename='img/real_bear.jpg') }}" class="mx-auto d-block"
+             style='height: 100%; width: 100%; object-fit: contain'></div>
+    </div>
+{% endblock %}

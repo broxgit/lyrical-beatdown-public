@@ -1,0 +1,10 @@
+If multiple albums:
+  if titles are equal:
+    original = album with earliest release date
+  if titles are similar: (i.e. This is How the Wind Shifts & This is How the Wind Shifts: Addendum)
+    - if track count is equal:
+      iterate through tracks and check the following:
+        if all track titles are equal:
+
+
+

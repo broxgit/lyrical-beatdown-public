@@ -1,0 +1,14 @@
+TODO:
+- Get rid of Swagger, it's no longer a backend only
+- Condense models
+- Use DB unless entities aren't in DB
+- Reduce external API calls
+- Maybe make a single DB table for albums that stores all the data
+- Display available artists/albums instead of search
+- Provide a way to request an artist/album (https://code.tutsplus.com/tutorials/intro-to-flask-adding-a-contact-page--net-28982)
+- include songs that don't have lyrics?
+- profanity checker
+- repeated phrases by artist/album
+- graphs/charts to display data
+- compare artists?
+- words per minute

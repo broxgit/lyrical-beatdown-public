@@ -1,0 +1,20 @@
+@startuml
+
+start
+:Get all artist albums;
+if (Multiple Similar Albums?) then (yes)
+
+    if (Multiple Albums with Same Name?) then (yes)
+        if (All Albums of Same Name Have Same # Of Tracks?) then (yes)
+            :Original/Valid Album = Earliest Release;
+        else (no)
+            stop
+        endif
+    elseif (no)
+    if (Multiple Albums with Similar Name?) then (yes)
+            :Do Something Here;
+    stop
+    endif
+stop
+
+@enduml

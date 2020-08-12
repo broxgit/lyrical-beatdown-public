@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% set active_page = "contact_form" %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="display-5">Request Artist</h1>
+                <p class="lead">Our content takes time and expensive resources to build. We'll eventually build artist
+                    and album data on the fly, until then you can send a request for an artist/album and we'll build and
+                    upload it in a timely manner.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {% if success %}
+                    <p>Thank you for your message. We'll get back to you shortly.</p>
+
+                {% else %}
+                    <form>
+                        <div class="form-group">
+                            <label for="artistInput">Artist</label>
+                            <input type="email" class="form-control" id="artistInput"
+                                   aria-describedby="artistHelp">
+                            <small id="artistHelp" class="form-text text-muted">Provide the artist name you'd like us to
+                                build (ensure spelling is correct)
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">Provide an email address if you'd like an
+                                update when we've built your data. We'll never share your email with anyone
+                                else.
+                            </small>
+                        </div>
+
+                            <h4>If you're a friend of mine, just text me.</h4>
+
+                        <button type="submit" class="btn btn-primary">Coming Soon!</button>
+                    </form>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

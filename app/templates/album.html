@@ -1,0 +1,246 @@
+{% extends "layout.html" %}
+
+{% block head_content %}
+    <script>
+        $(document).ready(function () {
+            $("#accordionExample").on("shown.bs.collapse", function () {
+                $.each($.fn.dataTable.tables(true), function () {
+                    $(this).DataTable().columns.adjust().draw();
+                });
+            });
+            $("#accordionExample2").on("shown.bs.collapse", function () {
+                $.each($.fn.dataTable.tables(true), function () {
+                    $(this).DataTable().columns.adjust().draw();
+                });
+            });
+            $('#simpleWords').DataTable({
+                order: [[1, "desc"]]
+            });
+            $('#complexWords').DataTable({
+                order: [[1, "desc"]]
+            });
+            $('#songTable').DataTable({
+                order: [[0, "asc"]],
+                iDisplayLength: 50
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url_for('browse_artists') }}">Browse Artists</a></li>
+                    <li class="breadcrumb-item"><a
+                            href="{{ url_for('get_artist', artist=album.artist_name|replace('/', '_')) }}">{{ album.artist_name }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ album.name }}
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row align-items-center justify-content-md-center">
+        <div class="col align-self-center text-center">
+            {% if album_image %}
+                <img src="{{ album_image }}" class="mx-auto" alt="artwork" height="250px" width="250px">
+            {% else %}
+                <img src="{{ url_for('static', filename='img/Images_album-art-missing.png') }}"
+                     class="mx-auto"
+                     alt="artwork" height="250px" width="250px">
+            {% endif %}
+            <br><br>
+            <h5>Artist:
+                <a href="{{ url_for('get_artist', artist=album.artist_name|replace('/', '_')) }}">{{ album.artist_name }}</a>
+            </h5>
+            <h5>Album:
+                <a href="{{ url_for('get_album', album_name=album.name, artist=album.artist_name|replace('/', '_')) }}">{{ album.name}}</a>
+            </h5>
+            <h5>Release Year:
+                <small class="text-muted">{{ album.year }}</small>
+            </h5>
+            {% if album_label %}
+                <h5>Label:
+                    <small class="text-muted">{{ album_label }}</small>
+                </h5>
+            {% endif %}
+        </div>
+    </div>
+    <br><br>
+    <div class="container">
+        <div class="row justify-content-md-center text-center align-items-center">
+            <div class="col-md-auto">
+                <ul class="list-group list-group-horizontal-sm">
+                    <li class="list-group-item "><p><strong>Total
+                        Words: </strong></p>{{ album.word_count }}</li>
+                    <li class="list-group-item "><p><strong>Unique Simple
+                        Words: </strong></p>{{ album.total_simple}}</li>
+                    <li class="list-group-item "><p><strong>Unique Complex
+                        Words: </strong></p>{{ album.total_complex }}</li>
+                    <li class="list-group-item "><p><strong>%
+                        Simple: </strong></p>{{ album.percent_simple }}</li>
+                    <li class="list-group-item "><p><strong>%
+                        Complex: </strong></p>{{ album.percent_complex }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="true" aria-controls="collapseTwo">
+                        Song Breakdown
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample2">
+                <div class="card-body">
+                    <div class="accordion" id="accordionExample2">
+                        <div class="table-responsive">
+                            <table id="songTable" class="table table-striped table-bordered table-bordered table-hover table-dark"
+                                   cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="d-none d-lg-table-cell">Track</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">% Simple</th>
+                                    <th scope="col">% Complex</th>
+                                    <th scope="col">Unique Words</th>
+                                    <th scope="col">Unique Complex Words</th>
+                                    <th scope="col">Total Words</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for song in songs|sort(attribute="music_brainz_data['position']") %}
+                                    <div class="modal fade classModal" id="{{ song.id }}Modal" tabindex="-1"
+                                         role="dialog"
+                                         aria-labelledby="{{ song.id }}_label"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title"
+                                                        id="{{ song.id }}_label">{{ song.title }}</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <div>
+                                                        Put some dope-ass facts about {{ song.title }} here!
+                                                    </div>
+                                                    <div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <tr>
+                                        <td class="d-none d-lg-table-cell">{{ song.music_brainz_data['position'] }}</td>
+                                        <td>
+                                            <a href="#" data-toggle="modal"
+                                               data-target="#{{ song.id }}Modal"> {{ song.title }}</a>
+                                        </td>
+                                        <td>{{ song.percent_simple }}</td>
+                                        <td>{{ song.percent_complex }}</td>
+                                        <td>{{ song.total_simple }}</td>
+                                        <td>{{ song.total_complex }}</td>
+                                        <td>{{ song.word_count }}</td>
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                        Word Count Breakdown
+                    </button>
+                </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="table-responsive">
+                                <br>
+                                <h4>Simple Words</h4>
+                                {% if top20simple %}
+                                    <table id="simpleWords"
+                                           class="table table-striped table-bordered table-bordered table-hover table-dark"
+                                           cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Word</th>
+                                            <th scope="col"># Times Used</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for key in top20simple.keys() %}
+                                            <tr>
+                                                <td>{{ key }}</td>
+                                                <td>{{ top20simple[key] }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="table-responsive">
+                                <br>
+                                <h4>Complex Words</h4>
+                                {% if top20complex %}
+                                    <table id="complexWords"
+                                           class="table table-striped table-bordered table-bordered table-hover table-dark"
+                                           cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Word</th>
+                                            <th scope="col"># Times Used</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for key in top20complex.keys() %}
+                                            <tr>
+                                                <td>{{ key }}</td>
+                                                <td>{{ top20complex[key] }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

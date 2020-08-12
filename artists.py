@@ -1,0 +1,10 @@
+Artists = ['The Almost', 'Avenged Sevenfold', 'Avril Lavigne', 'The Black Maria', 'Blindside',
+           'Bullet for My Valentine', 'Asking Alexandria', 'Chiodos', 'Cute is What We Aim For',
+           'Destroy Rebuild Until God Shows', 'Dope', 'Emery', 'Escape the Fate', 'Fall Out Boy', 'Falling in Reverse',
+           'Goldfinger', 'Good Charlotte', 'Halifax', 'Hawthorne Heights', 'Ice Nine Kills', 'Linkin Park',
+           'Jimmy Eat World', 'Jon Bellion', 'Limp Bizkit', 'Lorde', 'Mae', 'Matt Skiba and the Sekrets', 'Mest',
+           'Muse', 'My Chemical Romance', 'No Doubt', 'The Offspring', 'Papa Roach', 'Paramore', 'Plain White Ts',
+           'The Lonely Island', 'Mae', 'Mest', 'Pierce the Veil', 'Smash Mouth', 'Smile Empty Soul', 'SR-71',
+           'Stroke 9', 'A Thorn For Every Heart', 'Thrice', 'Tonight Alive', 'We Cam As Romans', '50 Cent',
+           'The Red Jumpsuit Apparatus', 'Sasoin', 'Scary Kids Scaring Kids', 'Sleepwave', 'Story of the Year',
+           'Sum 41', 'Tom DeLonge', 'Usher']
